@@ -15,6 +15,10 @@ class AbstractItem(ABC):
 
 class AbstractRect():
     @property
+    def width(self):
+        return self._w
+    
+    @property
     def coordinates(self):
         return {
             'x1': self._x,

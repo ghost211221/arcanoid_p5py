@@ -1,20 +1,19 @@
-from p5 import run, size, background
+from p5 import *
 
-from core.field import Field
-from core.items.ball import Ball
-from core.items.plank import Plank
-from core.items.block import Block
+from core.config import Config
 
 
-figures = [
-    Ball(100, 200),
-    # Plank(200, 300),
-    # Block(0, 0)
-]
+c = Config()
 
 def update_state():
-    for figure in figures:
+    for figure in c.figures:
         figure.update()
+
+    if c.ball.speed == 0:
+        c.place_ball()
+
+    if mouse_is_pressed:
+        c.ball.set_speed(10)
 
 def setup():
     size(1024, 640)
@@ -22,10 +21,9 @@ def setup():
 
 def draw():
     background(200, 200, 200)
-    field = Field()
-    field.draw_field()
+    c.field.draw_field()
 
-    for figure in figures:
+    for figure in c.figures:
         figure.draw()
 
     update_state()
